@@ -1,31 +1,27 @@
+/* Estilos Generales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f8f9fa;
 }
 
+/* Encabezado */
 header {
     background: #007bff;
     color: white;
     padding: 20px;
 }
 
+/* Sección de la tabla */
 section {
     margin: 20px auto;
     padding: 20px;
     background: white;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-}
-
-footer {
-    margin-top: 20px;
-    padding: 10px;
-    background: #333;
-    color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
 }
 
 /* Estilos para la tabla */
@@ -35,11 +31,11 @@ table {
     margin-top: 20px;
     background: white;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
     border-bottom: 1px solid #ddd;
     text-align: center;
 }
@@ -49,7 +45,7 @@ th {
     color: white;
 }
 
-/* Estilos para los inputs */
+/* Input de precio objetivo */
 input {
     width: 80px;
     padding: 5px;
@@ -63,7 +59,7 @@ input {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #007bff;
+    background: #28a745;
     color: white;
     padding: 15px;
     border-radius: 5px;
