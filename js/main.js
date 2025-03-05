@@ -20,17 +20,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function fetchData(url) {
     const productList = document.getElementById("product-list");
-    productList.innerHTML = "<tr><td colspan='7'>Cargando productos...</td></tr>";
+    const loadingMessage = document.getElementById("loading-message");
+    
+    productList.innerHTML = "";
+    loadingMessage.style.display = "block";
 
     try {
         const response = await fetch(url);
         const data = await response.json();
-
+        
+        loadingMessage.style.display = "none";
         productList.innerHTML = ""; 
 
         data.search_results.forEach(product => {
             const price = product?.price?.value;
-            const updatedDate = new Date().toLocaleString();
             const imageUrl = product?.image || "https://via.placeholder.com/60";
             const buyLink = product?.link || "#";
 
@@ -41,7 +44,7 @@ async function fetchData(url) {
                 <td><img src="${imageUrl}" class="product-image"></td>
                 <td>${product.title}</td>
                 <td>$${price.toFixed(2)}</td>
-                <td>${updatedDate}</td>
+                <td>${new Date().toLocaleString()}</td>
                 <td><input type="number" class="price-target" placeholder="Ingrese precio" /></td>
                 <td class="alert-status">-</td>
                 <td><a href="${buyLink}" target="_blank" class="buy-btn">🛒 Comprar</a></td>
