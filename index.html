@@ -12,8 +12,21 @@
         <p>Monitorea precios y recibe alertas en tiempo real.</p>
     </header>
 
+    <!-- Filtros de búsqueda -->
+    <section id="filters">
+        <input type="text" id="search-query" placeholder="Buscar productos...">
+        <select id="category">
+            <option value="electronics">Electrónica</option>
+            <option value="computers">Computadoras</option>
+            <option value="smartphones">Smartphones</option>
+            <option value="gaming">Gaming</option>
+            <option value="home">Hogar</option>
+        </select>
+        <button id="search-btn">🔍 Buscar</button>
+    </section>
+
     <section id="tracker">
-        <h2>📊 Seguimiento de Precios</h2>
+        <h2>📊 Resultados de la Búsqueda</h2>
         <table>
             <thead>
                 <tr>
@@ -25,7 +38,7 @@
                 </tr>
             </thead>
             <tbody id="product-list">
-                <!-- Los productos se cargarán aquí dinámicamente con JS -->
+                <!-- Los productos se cargarán aquí dinámicamente -->
             </tbody>
         </table>
     </section>
