@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async function () {
+=document.addEventListener("DOMContentLoaded", async function () {
     console.log("🚀 Cargando precios reales...");
 
     // API Key real
