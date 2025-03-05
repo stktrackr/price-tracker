@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Price Tracker</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>Price Tracker</h1>
+        <h1>🚀 Price Tracker</h1>
         <p>Monitorea precios y recibe alertas en tiempo real.</p>
     </header>
 
@@ -28,14 +30,13 @@
     <!-- Productos Destacados -->
     <section id="featured-products">
         <h2>🔥 Productos Destacados</h2>
-        <div id="featured-list">
-            <!-- Productos destacados cargados dinámicamente -->
-        </div>
+        <div id="featured-list"></div>
     </section>
 
-    <!-- Sección de Resultados -->
+    <!-- Resultados de búsqueda -->
     <section id="tracker">
-        <h2>Resultados de la Búsqueda</h2>
+        <h2>📊 Resultados de la Búsqueda</h2>
+        <div id="loading-message">Cargando productos...</div>
         <table>
             <thead>
                 <tr>
@@ -46,41 +47,39 @@
                     <th>Precio Objetivo</th>
                     <th>Alerta</th>
                     <th>Comprar</th>
+                    <th>❤️</th>
                 </tr>
             </thead>
-            <tbody id="product-list">
-                <!-- Productos cargados dinámicamente -->
-            </tbody>
+            <tbody id="product-list"></tbody>
         </table>
-        <div id="loading-message">Cargando productos...</div>
     </section>
 
-    <!-- Testimonios -->
-    <section id="testimonials">
-        <h2>⭐ Lo que dicen nuestros usuarios</h2>
-        <div id="testimonial-list">
-            <p>“¡Increíble! Me ha ayudado a ahorrar en compras online.” - Juan Pérez</p>
-            <p>“Fácil de usar y muy útil para comparar precios.” - María Gómez</p>
-            <p>“Las alertas de precio son un cambio de juego.” - Carlos Ruiz</p>
-        </div>
+    <!-- Historial de Precios -->
+    <section id="price-history">
+        <h2>📈 Historial de Precios</h2>
+        <canvas id="priceChart"></canvas>
     </section>
 
-    <!-- Preguntas Frecuentes -->
-    <section id="faq">
-        <h2>❓ Preguntas Frecuentes</h2>
-        <details>
-            <summary>¿Cómo funciona Price Tracker?</summary>
-            <p>Simplemente busca un producto y monitorea sus cambios de precio en tiempo real.</p>
-        </details>
-        <details>
-            <summary>¿Es gratis?</summary>
-            <p>Sí, puedes usarlo gratis. También ofrecemos opciones premium con más funciones.</p>
-        </details>
+    <!-- Lista de Deseos -->
+    <section id="wishlist">
+        <h2>🛒 Lista de Deseos</h2>
+        <ul id="wishlist-list"></ul>
     </section>
 
-    <!-- Formulario de Contacto -->
-    <section id="contact">
-        <h2>📩 Contáctanos</h2>
-        <form id="contact-form">
-            <input type="text" placeholder="Tu Nombre" required>
-            <input type="email" placeholder="Tu Correo" requ
+    <!-- Configuración de Moneda -->
+    <section id="currency-settings">
+        <h2>💰 Configuración de Moneda</h2>
+        <select id="currency-select">
+            <option value="USD">$ - Dólares</option>
+            <option value="EUR">€ - Euros</option>
+            <option value="MXN">$ - Pesos MXN</option>
+        </select>
+    </section>
+
+    <footer>
+        <p>© 2025 Price Tracker - Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
