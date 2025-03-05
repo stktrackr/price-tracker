@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         { name: "Tarjeta Gráfica RTX 3060", asin: "B08WPRMVWB" },
         { name: "iPhone 14 Pro", asin: "B0BDJH9V9J" },
         { name: "Monitor Gaming 144Hz", asin: "B08G9BJ8ZB" },
-        { name: "Teclado Mecánico RGB", asin: "B07W6JNQXP" }
+        { name: "Teclado Mecánico RGB", asin: "B07W6JNQXP" },
+        { name: "Audífonos Inalámbricos Sony", asin: "B07QK1Z5N6" },
+        { name: "Mouse Gamer Logitech G502", asin: "B07QK1ZXJL" }
     ];
 
     const productList = document.getElementById("product-list");
@@ -22,9 +24,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             const response = await fetch(`${BASE_URL}&type=product&amazon_domain=amazon.com&asin=${product.asin}`);
             const data = await response.json();
 
-            // Extraer el precio y la hora de actualización real
+            // Extraer el precio y la fecha completa
             const price = data.product?.buybox_winner?.price?.value || "No disponible";
-            const updated = new Date(data.product?.buybox_winner?.updated_at || Date.now()).toLocaleTimeString();
+            const updatedRaw = data.product?.buybox_winner?.updated_at || Date.now();
+            const updatedDate = new Date(updatedRaw);
+            const updated = `${updatedDate.toLocaleDateString()} ${updatedDate.toLocaleTimeString()}`;
 
             const row = document.createElement("tr");
             row.innerHTML = `
