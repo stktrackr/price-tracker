@@ -8,13 +8,13 @@
 </head>
 <body>
     <header>
-        <h1>PriceTracker</h1>
+        <h1>🚀 Price Tracker</h1>
         <p>Monitorea precios y recibe alertas en tiempo real.</p>
     </header>
 
     <!-- Filtros de búsqueda -->
     <section id="filters">
-        <input type="text" id="search-query" placeholder="Buscar productos...">
+        <input type="text" id="search-query" placeholder="🔍 Buscar productos...">
         <select id="category">
             <option value="electronics">Electrónica</option>
             <option value="computers">Computadoras</option>
@@ -25,16 +25,19 @@
         <button id="search-btn">🔍 Buscar</button>
     </section>
 
+    <!-- Sección de Resultados -->
     <section id="tracker">
         <h2>📊 Resultados de la Búsqueda</h2>
         <table>
             <thead>
                 <tr>
+                    <th>Imagen</th>
                     <th>Producto</th>
                     <th>Precio Actual</th>
                     <th>Última Actualización</th>
                     <th>Precio Objetivo</th>
                     <th>Alerta</th>
+                    <th>Comprar</th>
                 </tr>
             </thead>
             <tbody id="product-list">
