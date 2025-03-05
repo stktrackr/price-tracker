@@ -5,81 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Price Tracker</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- Vincula tus fuentes e íconos aquí -->
 </head>
 <body>
     <header>
-        <h1>🚀 Price Tracker</h1>
-        <p>Monitorea precios y recibe alertas en tiempo real.</p>
+        <nav>
+            <!-- Menú de navegación -->
+        </nav>
+        <div class="hero">
+            <h1>Bienvenido a Price Tracker</h1>
+            <p>Monitorea y recibe alertas de precios en tiempo real.</p>
+        </div>
     </header>
-
-    <!-- Filtros de búsqueda -->
-    <section id="filters">
-        <input type="text" id="search-query" placeholder="🔍 Buscar productos...">
-        <select id="category">
-            <option value="electronics">Electrónica</option>
-            <option value="computers">Computadoras</option>
-            <option value="smartphones">Smartphones</option>
-            <option value="gaming">Gaming</option>
-            <option value="home">Hogar</option>
-        </select>
-        <button id="search-btn">🔍 Buscar</button>
-    </section>
-
-    <!-- Productos Destacados -->
-    <section id="featured-products">
-        <h2>🔥 Productos Destacados</h2>
-        <div id="featured-list"></div>
-    </section>
-
-    <!-- Resultados de búsqueda -->
-    <section id="tracker">
-        <h2>📊 Resultados de la Búsqueda</h2>
-        <div id="loading-message">Cargando productos...</div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Imagen</th>
-                    <th>Producto</th>
-                    <th>Precio Actual</th>
-                    <th>Última Actualización</th>
-                    <th>Precio Objetivo</th>
-                    <th>Alerta</th>
-                    <th>Comprar</th>
-                    <th>❤️</th>
-                </tr>
-            </thead>
-            <tbody id="product-list"></tbody>
-        </table>
-    </section>
-
-    <!-- Historial de Precios -->
-    <section id="price-history">
-        <h2>📈 Historial de Precios</h2>
-        <canvas id="priceChart"></canvas>
-    </section>
-
-    <!-- Lista de Deseos -->
-    <section id="wishlist">
-        <h2>🛒 Lista de Deseos</h2>
-        <ul id="wishlist-list"></ul>
-    </section>
-
-    <!-- Configuración de Moneda -->
-    <section id="currency-settings">
-        <h2>💰 Configuración de Moneda</h2>
-        <select id="currency-select">
-            <option value="USD">$ - Dólares</option>
-            <option value="EUR">€ - Euros</option>
-            <option value="MXN">$ - Pesos MXN</option>
-        </select>
-    </section>
-
+    <main>
+        <section id="search">
+            <!-- Barra de búsqueda y filtros -->
+        </section>
+        <section id="featured-products">
+            <!-- Productos destacados -->
+        </section>
+        <section id="product-list">
+            <!-- Lista de productos -->
+        </section>
+        <section id="price-history">
+            <!-- Historial de precios -->
+        </section>
+        <section id="wishlist">
+            <!-- Lista de deseos -->
+        </section>
+    </main>
     <footer>
-        <p>© 2025 Price Tracker - Todos los derechos reservados.</p>
+        <p>&copy; 2025 Price Tracker. Todos los derechos reservados.</p>
     </footer>
-
     <script src="js/main.js"></script>
 </body>
 </html>
