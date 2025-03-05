@@ -45,7 +45,14 @@ button:hover {
     background: #0056b3;
 }
 
-/* Sección de la tabla */
+/* Mensaje de carga */
+#loading-message {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Tabla */
 section {
     margin: 20px auto;
     padding: 20px;
@@ -56,14 +63,10 @@ section {
     overflow-x: auto;
 }
 
-/* Estilos para la tabla */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
 }
 
 th, td {
@@ -77,7 +80,7 @@ th {
     color: white;
 }
 
-/* Imagen de productos */
+/* Imagen */
 .product-image {
     width: 60px;
     height: 60px;
@@ -91,22 +94,8 @@ th {
     padding: 8px;
     border-radius: 5px;
     text-decoration: none;
-    transition: 0.3s;
 }
 
 .buy-btn:hover {
     background: #218838;
-}
-
-/* Notificaciones */
-#notification-box {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #28a745;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    display: none;
 }
