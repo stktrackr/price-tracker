@@ -29,14 +29,23 @@ async function fetchData(url) {
         productList.innerHTML = ""; // Limpiar la tabla antes de inyectar datos
 
         data.search_results.forEach(product => {
-            const price = product?.price?.value || "No disponible";
-            const updatedDate = new Date().toLocaleString();
+            const price = product?.price?.value;
+            const updatedRaw = product?.buybox_winner?.updated_at || Date.now();
+            const updatedDate = new Date(updatedRaw);
+            
+            // Ajuste de la hora a la zona horaria del usuario
+            const localTime = updatedDate.toLocaleString(undefined, {
+                timeZoneName: "short"
+            });
+
+            // Solo mostrar productos con precio disponible
+            if (!price) return; 
 
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${product.title}</td>
-                <td>$${price}</td>
-                <td>${updatedDate}</td>
+                <td>$${price.toFixed(2)}</td>
+                <td>${localTime}</td>
                 <td><input type="number" class="price-target" placeholder="Ingrese precio" /></td>
                 <td class="alert-status">-</td>
             `;
