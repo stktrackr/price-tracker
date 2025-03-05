@@ -1,4 +1,3 @@
-/* Estilos Generales */
 body {
     font-family: 'Arial', sans-serif;
     text-align: center;
@@ -14,7 +13,7 @@ header {
     padding: 20px;
 }
 
-/* Sección */
+/* Secciones */
 section {
     margin: 20px auto;
     padding: 20px;
@@ -24,54 +23,32 @@ section {
     max-width: 90%;
 }
 
-/* Botones */
-button {
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
     background: #007bff;
     color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
-button:hover {
-    background: #0056b3;
+/* Wishlist */
+#wishlist-list {
+    list-style: none;
+    padding: 0;
 }
 
-/* Productos Destacados */
-#featured-list {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-/* Testimonios */
-#testimonials p {
-    font-style: italic;
-    color: #555;
-}
-
-/* FAQ */
-details {
-    margin: 10px 0;
+#wishlist-list li {
     background: #f1f1f1;
     padding: 10px;
+    margin: 5px 0;
     border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Contacto */
-#contact-form input, #contact-form textarea {
-    width: 80%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Redes Sociales */
-#social-links a {
-    margin: 10px;
-    text-decoration: none;
-    color: #007bff;
 }
