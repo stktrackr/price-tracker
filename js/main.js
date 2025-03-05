@@ -1,46 +1,56 @@
-document.addEventListener("DOMContentLoaded", async function () {
-    console.log("🚀 Cargando precios en tiempo real...");
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("🚀 Price Tracker listo para buscar productos dinámicos...");
 
     const API_KEY = "53C09080269C4EFB88ECE212F519E7E4";
     const BASE_URL = "https://api.rainforestapi.com/request?api_key=" + API_KEY;
+    
+    document.getElementById("search-btn").addEventListener("click", async function () {
+        const query = document.getElementById("search-query").value;
+        const category = document.getElementById("category").value;
+        
+        if (!query) {
+            alert("Por favor, ingrese un término de búsqueda.");
+            return;
+        }
 
-    const products = [
-        { name: "PlayStation 5", asin: "B08FC5L3RG" },
-        { name: "Tarjeta Gráfica RTX 3060", asin: "B08WPRMVWB" },
-        { name: "iPhone 14 Pro", asin: "B0BDJH9V9J" },
-        { name: "Monitor Gaming 144Hz", asin: "B08G9BJ8ZB" },
-        { name: "Teclado Mecánico RGB", asin: "B07W6JNQXP" },
-        { name: "Audífonos Sony WH-1000XM4", asin: "B0863TXGM3" },
-        { name: "Laptop ASUS ROG Strix", asin: "B09R1V9C5T" }
-    ];
+        const url = `${BASE_URL}&type=search&amazon_domain=amazon.com&search_term=${query}&category_id=${category}`;
+        fetchData(url);
+    });
+});
 
+async function fetchData(url) {
     const productList = document.getElementById("product-list");
-    productList.innerHTML = ""; // Limpiar tabla antes de inyectar datos
+    productList.innerHTML = "<tr><td colspan='5'>Cargando productos...</td></tr>";
 
-    for (const product of products) {
-        try {
-            const response = await fetch(`${BASE_URL}&type=product&amazon_domain=amazon.com&asin=${product.asin}`);
-            const data = await response.json();
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
 
-            const price = data.product?.buybox_winner?.price?.value || "No disponible";
-            const updatedRaw = data.product?.buybox_winner?.updated_at || Date.now();
-            const updatedDate = new Date(updatedRaw);
-            const formattedDate = `${updatedDate.toLocaleDateString()} ${updatedDate.toLocaleTimeString()}`;
+        productList.innerHTML = ""; // Limpiar la tabla antes de inyectar datos
+
+        data.search_results.forEach(product => {
+            const price = product?.price?.value || "No disponible";
+            const updatedDate = new Date().toLocaleString();
 
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${product.name}</td>
+                <td>${product.title}</td>
                 <td>$${price}</td>
-                <td>${formattedDate}</td>
+                <td>${updatedDate}</td>
                 <td><input type="number" class="price-target" placeholder="Ingrese precio" /></td>
                 <td class="alert-status">-</td>
             `;
             productList.appendChild(row);
-        } catch (error) {
-            console.error("Error al obtener precio:", error);
-        }
-    }
+        });
 
+        attachPriceAlerts();
+    } catch (error) {
+        console.error("Error al obtener productos:", error);
+        productList.innerHTML = "<tr><td colspan='5'>Error al cargar productos.</td></tr>";
+    }
+}
+
+function attachPriceAlerts() {
     document.querySelectorAll(".price-target").forEach((input, index) => {
         input.addEventListener("input", function () {
             const targetPrice = parseFloat(input.value);
@@ -51,26 +61,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                 if (currentPrice && targetPrice >= currentPrice) {
                     alertCell.innerHTML = "🔔 Precio alcanzado";
                     alertCell.style.color = "green";
-                    showNotification(`¡El precio de ${products[index].name} ha bajado a $${currentPrice}!`);
+                    showNotification(`¡El precio ha bajado a $${currentPrice}!`);
                 } else {
                     alertCell.innerHTML = "❌ Aún no baja";
                     alertCell.style.color = "red";
                 }
-            } else {
-                alertCell.innerHTML = "-";
             }
         });
     });
-});
-
-function showNotification(message) {
-    const notificationBox = document.getElementById("notification-box");
-    const notificationMessage = document.getElementById("notification-message");
-
-    notificationMessage.textContent = message;
-    notificationBox.style.display = "block";
-
-    setTimeout(() => {
-        notificationBox.style.display = "none";
-    }, 5000);
 }
