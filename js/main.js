@@ -5,11 +5,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     const API_KEY = "TU_API_KEY_AQUI";
     const BASE_URL = "https://api.rainforestapi.com/request?api_key=" + API_KEY;
 
-    // Productos a rastrear (IDs de Amazon)
+    // Lista de productos con ASIN de Amazon
     const productIDs = [
         { name: "PlayStation 5", asin: "B08FC5L3RG" },
         { name: "Tarjeta Gráfica RTX 3060", asin: "B08WPRMVWB" },
-        { name: "iPhone 14 Pro", asin: "B0BDJH9V9J" }
+        { name: "iPhone 14 Pro", asin: "B0BDJH9V9J" },
+        { name: "Monitor Gaming 144Hz", asin: "B08G9BJ8ZB" },
+        { name: "Teclado Mecánico RGB", asin: "B07W6JNQXP" }
     ];
 
     const productList = document.getElementById("product-list");
@@ -20,9 +22,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             const response = await fetch(`${BASE_URL}&type=product&amazon_domain=amazon.com&asin=${product.asin}`);
             const data = await response.json();
 
-            // Obtener el precio si está disponible
+            // Extraer el precio y la hora de actualización real
             const price = data.product?.buybox_winner?.price?.value || "No disponible";
-            const updated = new Date().toLocaleTimeString();
+            const updated = new Date(data.product?.buybox_winner?.updated_at || Date.now()).toLocaleTimeString();
 
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -49,6 +51,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 if (currentPrice && targetPrice >= currentPrice) {
                     alertCell.innerHTML = "🔔 Precio alcanzado";
                     alertCell.style.color = "green";
+                    showNotification(`El precio de ${productIDs[index].name} ha bajado a $${currentPrice}!`);
                 } else {
                     alertCell.innerHTML = "❌ Aún no baja";
                     alertCell.style.color = "red";
@@ -61,3 +64,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     console.log("✅ Precios actualizados con datos reales.");
 });
+
+// Notificaciones dentro del sitio
+function showNotification(message) {
+    const notificationBox = document.getElementById("notification-box");
+    const notificationMessage = document.getElementById("notification-message");
+
+    notificationMessage.textContent = message;
+    notificationBox.style.display = "block";
+
+    setTimeout(() => {
+        notificationBox.style.display = "none";
+    }, 5000);
+}
