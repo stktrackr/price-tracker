@@ -48,3 +48,12 @@ th {
     background: #007bff;
     color: white;
 }
+
+/* Estilos para los inputs */
+input {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
