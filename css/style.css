@@ -16,6 +16,9 @@ header {
 
 /* Sección de filtros */
 #filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     margin: 20px auto;
     padding: 15px;
     background: white;
@@ -26,7 +29,6 @@ header {
 
 input, select, button {
     padding: 10px;
-    margin: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
@@ -36,6 +38,7 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
@@ -74,6 +77,27 @@ th {
     color: white;
 }
 
+/* Imagen de productos */
+.product-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+/* Botón de compra */
+.buy-btn {
+    background: #28a745;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: #218838;
+}
+
 /* Notificaciones */
 #notification-box {
     position: fixed;
@@ -85,16 +109,4 @@ th {
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     display: none;
-}
-
-/* Hacer la tabla responsiva */
-@media (max-width: 768px) {
-    th, td {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    input {
-        width: 70px;
-    }
 }
