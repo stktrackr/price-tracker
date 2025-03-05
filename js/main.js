@@ -1,36 +1,52 @@
-document.addEventListener("DOMContentLoaded", function() {
-    console.log("🚀 Price Tracker está cargando productos...");
+document.addEventListener("DOMContentLoaded", async function () {
+    console.log("🚀 Cargando precios reales...");
 
-    const products = [
-        { name: "PlayStation 5", price: 499, updated: "Hace 10 minutos" },
-        { name: "Tarjeta Gráfica RTX 3060", price: 379, updated: "Hace 5 minutos" },
-        { name: "iPhone 14 Pro", price: 999, updated: "Hace 2 minutos" }
+    // Clave API de Rainforest (Reemplaza con la tuya)
+    const API_KEY = "TU_API_KEY_AQUI";
+    const BASE_URL = "https://api.rainforestapi.com/request?api_key=" + API_KEY;
+
+    // Productos a rastrear (IDs de Amazon)
+    const productIDs = [
+        { name: "PlayStation 5", asin: "B08FC5L3RG" },
+        { name: "Tarjeta Gráfica RTX 3060", asin: "B08WPRMVWB" },
+        { name: "iPhone 14 Pro", asin: "B0BDJH9V9J" }
     ];
 
     const productList = document.getElementById("product-list");
-    productList.innerHTML = ""; 
+    productList.innerHTML = ""; // Limpiar la tabla
 
-    products.forEach((product, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${product.name}</td>
-            <td>$${product.price}</td>
-            <td>${product.updated}</td>
-            <td><input type="number" class="price-target" data-index="${index}" placeholder="Ingrese precio" /></td>
-            <td class="alert-status">-</td>
-        `;
-        productList.appendChild(row);
-    });
+    for (const product of productIDs) {
+        try {
+            const response = await fetch(`${BASE_URL}&type=product&amazon_domain=amazon.com&asin=${product.asin}`);
+            const data = await response.json();
 
-    // Detectar cambios en el input del precio objetivo
+            // Obtener el precio si está disponible
+            const price = data.product?.buybox_winner?.price?.value || "No disponible";
+            const updated = new Date().toLocaleTimeString();
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${product.name}</td>
+                <td>$${price}</td>
+                <td>${updated}</td>
+                <td><input type="number" class="price-target" placeholder="Ingrese precio" /></td>
+                <td class="alert-status">-</td>
+            `;
+            productList.appendChild(row);
+        } catch (error) {
+            console.error("Error obteniendo precio:", error);
+        }
+    }
+
+    // Agregar detección de precios
     document.querySelectorAll(".price-target").forEach((input, index) => {
-        input.addEventListener("input", function() {
+        input.addEventListener("input", function () {
             const targetPrice = parseFloat(input.value);
-            const currentPrice = products[index].price;
-            const alertCell = productList.rows[index].cells[4];
+            const currentPrice = parseFloat(document.querySelectorAll("td:nth-child(2)")[index].textContent.replace("$", ""));
+            const alertCell = document.querySelectorAll(".alert-status")[index];
 
             if (!isNaN(targetPrice) && targetPrice >= 0) {
-                if (targetPrice >= currentPrice) {
+                if (currentPrice && targetPrice >= currentPrice) {
                     alertCell.innerHTML = "🔔 Precio alcanzado";
                     alertCell.style.color = "green";
                 } else {
@@ -43,5 +59,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    console.log("✅ Productos cargados correctamente.");
+    console.log("✅ Precios actualizados con datos reales.");
 });
