@@ -20,62 +20,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function fetchData(url) {
     const productList = document.getElementById("product-list");
-    productList.innerHTML = "<tr><td colspan='5'>Cargando productos...</td></tr>";
+    productList.innerHTML = "<tr><td colspan='7'>Cargando productos...</td></tr>";
 
     try {
         const response = await fetch(url);
         const data = await response.json();
 
-        productList.innerHTML = ""; // Limpiar la tabla antes de inyectar datos
+        productList.innerHTML = ""; 
 
         data.search_results.forEach(product => {
             const price = product?.price?.value;
-            const updatedRaw = product?.buybox_winner?.updated_at || Date.now();
-            const updatedDate = new Date(updatedRaw);
-            
-            // Ajuste de la hora a la zona horaria del usuario
-            const localTime = updatedDate.toLocaleString(undefined, {
-                timeZoneName: "short"
-            });
+            const updatedDate = new Date().toLocaleString();
+            const imageUrl = product?.image || "https://via.placeholder.com/60";
+            const buyLink = product?.link || "#";
 
-            // Solo mostrar productos con precio disponible
-            if (!price) return; 
+            if (!price) return;
 
             const row = document.createElement("tr");
             row.innerHTML = `
+                <td><img src="${imageUrl}" class="product-image"></td>
                 <td>${product.title}</td>
                 <td>$${price.toFixed(2)}</td>
-                <td>${localTime}</td>
+                <td>${updatedDate}</td>
                 <td><input type="number" class="price-target" placeholder="Ingrese precio" /></td>
                 <td class="alert-status">-</td>
+                <td><a href="${buyLink}" target="_blank" class="buy-btn">🛒 Comprar</a></td>
             `;
             productList.appendChild(row);
         });
-
-        attachPriceAlerts();
     } catch (error) {
         console.error("Error al obtener productos:", error);
-        productList.innerHTML = "<tr><td colspan='5'>Error al cargar productos.</td></tr>";
+        productList.innerHTML = "<tr><td colspan='7'>Error al cargar productos.</td></tr>";
     }
-}
-
-function attachPriceAlerts() {
-    document.querySelectorAll(".price-target").forEach((input, index) => {
-        input.addEventListener("input", function () {
-            const targetPrice = parseFloat(input.value);
-            const currentPrice = parseFloat(document.querySelectorAll("td:nth-child(2)")[index].textContent.replace("$", ""));
-            const alertCell = document.querySelectorAll(".alert-status")[index];
-
-            if (!isNaN(targetPrice) && targetPrice >= 0) {
-                if (currentPrice && targetPrice >= currentPrice) {
-                    alertCell.innerHTML = "🔔 Precio alcanzado";
-                    alertCell.style.color = "green";
-                    showNotification(`¡El precio ha bajado a $${currentPrice}!`);
-                } else {
-                    alertCell.innerHTML = "❌ Aún no baja";
-                    alertCell.style.color = "red";
-                }
-            }
-        });
-    });
 }
