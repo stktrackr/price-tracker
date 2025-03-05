@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const productList = document.getElementById("product-list");
     productList.innerHTML = ""; 
 
-    products.forEach(product => {
+    products.forEach((product, index) => {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${product.name}</td>
             <td>$${product.price}</td>
             <td>${product.updated}</td>
-            <td><input type="number" class="price-target" placeholder="Ingrese precio" /></td>
+            <td><input type="number" class="price-target" data-index="${index}" placeholder="Ingrese precio" /></td>
             <td class="alert-status">-</td>
         `;
         productList.appendChild(row);
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Detectar cambios en el input del precio objetivo
     document.querySelectorAll(".price-target").forEach((input, index) => {
-        input.addEventListener("change", function() {
+        input.addEventListener("input", function() {
             const targetPrice = parseFloat(input.value);
             const currentPrice = products[index].price;
             const alertCell = productList.rows[index].cells[4];
