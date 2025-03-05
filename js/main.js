@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
     console.log("🚀 Cargando precios reales...");
 
-    // Clave API de Rainforest (Reemplaza con la tuya)
-    const API_KEY = "TU_API_KEY_AQUI";
+    // API Key real
+    const API_KEY = "53C09080269C4EFB88ECE212F519E7E4";
     const BASE_URL = "https://api.rainforestapi.com/request?api_key=" + API_KEY;
 
     // Lista de productos con ASIN de Amazon
