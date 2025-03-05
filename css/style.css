@@ -14,45 +14,7 @@ header {
     padding: 20px;
 }
 
-/* Sección de filtros */
-#filters {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px auto;
-    padding: 15px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-}
-
-input, select, button {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #0056b3;
-}
-
-/* Mensaje de carga */
-#loading-message {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* Tabla */
+/* Sección */
 section {
     margin: 20px auto;
     padding: 20px;
@@ -60,42 +22,56 @@ section {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 90%;
-    overflow-x: auto;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-}
-
-th {
+/* Botones */
+button {
     background: #007bff;
     color: white;
-}
-
-/* Imagen */
-.product-image {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
-
-/* Botón de compra */
-.buy-btn {
-    background: #28a745;
-    color: white;
-    padding: 8px;
+    border: none;
+    padding: 10px;
     border-radius: 5px;
-    text-decoration: none;
+    cursor: pointer;
 }
 
-.buy-btn:hover {
-    background: #218838;
+button:hover {
+    background: #0056b3;
+}
+
+/* Productos Destacados */
+#featured-list {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Testimonios */
+#testimonials p {
+    font-style: italic;
+    color: #555;
+}
+
+/* FAQ */
+details {
+    margin: 10px 0;
+    background: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Contacto */
+#contact-form input, #contact-form textarea {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Redes Sociales */
+#social-links a {
+    margin: 10px;
+    text-decoration: none;
+    color: #007bff;
 }
