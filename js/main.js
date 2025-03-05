@@ -8,8 +8,13 @@ document.addEventListener("DOMContentLoaded", function() {
         { name: "iPhone 14 Pro", price: "$999", updated: "Hace 2 minutos" }
     ];
 
-    // Insertar productos en la tabla
+    // Verificamos que el elemento con ID 'product-list' existe
     const productList = document.getElementById("product-list");
+    if (!productList) {
+        console.error("❌ No se encontró el elemento #product-list.");
+        return;
+    }
+
     productList.innerHTML = ""; // Limpiar contenido previo
 
     products.forEach(product => {
@@ -21,4 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
         productList.appendChild(row);
     });
+
+    console.log("✅ Productos cargados correctamente.");
 });
